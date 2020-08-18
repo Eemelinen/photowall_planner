@@ -1,12 +1,18 @@
 import React, { Component } from 'react'
 import './App.css'
+
+console.log('Hello sander');
+
 class App extends Component {
   state = {
     cow: '',
-    text: ''
+    text: '',
+    env: ''
   }
+
 componentDidMount() {
     this.fetchCow()
+    this.fetchEnv();
   }
 fetchCow = async () => {
     const response = await fetch(`/api/cow`)
@@ -14,6 +20,13 @@ fetchCow = async () => {
     const cow = initialCow.moo
     this.setState({ cow })
   }
+  
+  fetchEnv = async () => {
+    const response = await fetch(`/api/getenv`)
+    const env = await response.json();
+    console.log(env);
+  }
+
 customCow = async evt => {
     evt.preventDefault()
     const text = this.state.text

@@ -2,6 +2,7 @@ const express = require('express')
 const cowsay = require('cowsay')
 const cors = require('cors')
 const path = require('path')
+require('dotenv').config()
 
 // Create the server
 const app = express()
@@ -26,6 +27,16 @@ app.get('/api/cow/', cors(), async (req, res, next) => {
     res.json({ moo })
   } catch (err) {
     next(err)
+  }
+})
+
+app.get('/api/getenv', cors(), async (req, res, next) => {
+  try {
+    const testEnv = process.env.TEST_ENV_1;
+    console.log(testEnv);
+    res.json(testEnv)
+  } catch (err) {
+    next(err);
   }
 })
 
